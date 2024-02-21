@@ -44,13 +44,14 @@
     protected override async Task OnInitializedAsync()
     {
         // Carga de datos ficticios para la prueba
+        
         tables = new List<Table>
     {
       new Table { Id = 1, Name = "Mesa 1", Capacity = 4, Location = "Interior", Category = "Normal", IsAvailable = true },
       new Table { Id = 2, Name = "Mesa 2", Capacity = 2, Location = "Terraza", Category = "VIP", IsAvailable = false, Order = new Order { Id = 101 } },
       new Table { Id = 3, Name = "Mesa 3", Capacity = 6, Location = "Interior", Category = "Normal", IsAvailable = true }
     };
-
+        
         // Lógica para cargar mesas desde la API (cuando esté lista)
     }
 }

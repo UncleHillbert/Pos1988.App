@@ -13,4 +13,6 @@ public class Order
     public virtual Table Table { get; set; }
 
     public virtual ICollection<OrderItem> OrderItems { get; set; }
+
+    public decimal Total { get; set; }
 }

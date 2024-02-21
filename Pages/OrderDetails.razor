@@ -1,10 +1,9 @@
-﻿@page "/orden"
-@using Pos1988.Data;
+﻿@page "/orders/{OrderId:int}"
+@using Pos1988.Data
 
-<h1>Detalles de la orden</h1>
+<h1>Detalles de la Orden</h1>
 
 <p>
-    <strong>Fecha:</strong> @order.Created.ToShortDateString()
 </p>
 
 <table class="table">
@@ -12,14 +11,19 @@
         <tr>
             <th>Nombre</th>
             <th>Precio</th>
+            <th>Cantidad</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in order.Items)
+        @foreach (var orderItem in order.OrderItems)
         {
             <tr>
-                <td>@item.Name</td>
-                <td>@item.Price.ToString("C")</td>
+                <td>@orderItem.MenuItem.Name</td>
+                <td>@orderItem.MenuItem.Price.ToString("C")</td>
+                <td>
+                    <input type="number" min="1" value="@orderItem.Quantity"
+                       @onchange="(e) => UpdateQuantity(orderItem, e.Value)" />
+                </td>
             </tr>
         }
     </tbody>
@@ -30,23 +34,37 @@
 </p>
 
 @code {
+    [Parameter] public int OrderId { get; set; }
     private Order order;
+    private string errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
-        // Carga de datos ficticios para la prueba
-        order = new Order
-            {
-                Created = DateTime.Now,
-                Items = new List<OrderItem>
-      {
-        new OrderItem { Name = "Hamburguesa", Price = 10.50m },
-        new OrderItem { Name = "Papas fritas", Price = 5.00m },
-        new OrderItem { Name = "Refresco", Price = 2.50m }
-      }
-            };
+        try
+        {
 
-        // Cálculo del total
-        order.Total = order.Items.Sum(i => i.Price);
+            // Cálculo del total
+            order.Total = order.OrderItems.Sum(i => i.MenuItem.Price * i.Quantity);
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
     }
+
+    private void UpdateQuantity(OrderItem orderItem, object quantity)
+    {
+        if (int.TryParse(quantity.ToString(), out int newQuantity) && newQuantity > 0)
+        {
+            orderItem.Quantity = newQuantity;
+            UpdateTotal();
+        }
+    }
+
+    private void UpdateTotal()
+    {
+        order.Total = order.OrderItems.Sum(item => item.MenuItem.Price * item.Quantity);
+    }
+
+    // ... Función de carga de la orden (LoadOrderFromAPI)
 }

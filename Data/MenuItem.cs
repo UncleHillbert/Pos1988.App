@@ -12,5 +12,8 @@ public class MenuItem
 
     public string Category { get; set; }
 
+    public bool IsSelected { get; set; }
+
     public virtual ICollection<OrderItem> OrderItems { get; set; }
+
 }

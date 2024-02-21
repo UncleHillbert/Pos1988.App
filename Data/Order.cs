@@ -3,9 +3,14 @@
 public class Order
 {
     public int Id { get; set; }
-    public DateTime Created { get; set; }
 
-    public List<OrderItem> Items { get; set; }
-    public decimal Price { get; set; }
-    public decimal Total { get; set; }
+    public string Status { get; set; }
+
+    public DateTime OrderDate { get; set; }
+
+    public int TableId { get; set; }
+
+    public virtual Table Table { get; set; }
+
+    public virtual ICollection<OrderItem> OrderItems { get; set; }
 }

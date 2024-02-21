@@ -1,4 +1,4 @@
-﻿@page "/mesas"
+﻿@page "/tables"
 @using Pos1988.Data;
 
 <h1>Control de mesas</h1>
@@ -6,44 +6,51 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Número</th>
-            <th>Estado</th>
-            <th>Personas</th>
+            <th>Nombre</th>
+            <th>Capacidad</th>
+            <th>Ubicación</th>
+            <th>Categoría</th>
+            <th>Disponible</th>
             <th>Orden</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var mesa in mesas)
+        @foreach (var table in tables)
         {
             <tr>
-                <td>@mesa.Id</td>
-                <td>@mesa.Status</td>
-                <td>@mesa.QuantityPeople</td>
-                <td>@mesa.Order?.Id</td>
+                <td>@table.Name</td>
+                <td>@table.Capacity</td>
+                <td>@table.Location</td>
+                <td>@table.Category</td>
+                <td>@table.IsAvailable ? "Sí" : "No"</td>
                 <td>
-                    <a href="/ordenes/@mesa.Order?.Id" class="btn btn-primary btn-sm"
-                       style="visibility: @(mesa.Order == null ? "hidden" : "visible")">
-                        Ver Orden
-                    </a>
+                    @if (table.Order != null)
+                    {
+                        <a href="/orders/@table.Order.Id" class="btn btn-primary btn-sm">
+                            Ver Orden
+                        </a>
+                    }
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<a href="/mesas/crear" class="btn btn-primary">Agregar mesa</a>
+<a href="/tables/create" class="btn btn-primary">Agregar mesa</a>
 
 @code {
-    private List<Mesa> mesas;
+    private List<Table> tables;
 
     protected override async Task OnInitializedAsync()
     {
-        mesas = new List<Mesa>
+        // Carga de datos ficticios para la prueba
+        tables = new List<Table>
     {
-      new Mesa { Id = 1, Status = "Disponible", QuantityPeople = 4 },
-      new Mesa { Id = 2, Status = "Ocupada", QuantityPeople = 2, Order = new Order { Id = 101 } },
-      new Mesa { Id = 3, Status = "Reservada", QuantityPeople = 6 }
+      new Table { Id = 1, Name = "Mesa 1", Capacity = 4, Location = "Interior", Category = "Normal", IsAvailable = true },
+      new Table { Id = 2, Name = "Mesa 2", Capacity = 2, Location = "Terraza", Category = "VIP", IsAvailable = false, Order = new Order { Id = 101 } },
+      new Table { Id = 3, Name = "Mesa 3", Capacity = 6, Location = "Interior", Category = "Normal", IsAvailable = true }
     };
 
+        // Lógica para cargar mesas desde la API (cuando esté lista)
     }
 }

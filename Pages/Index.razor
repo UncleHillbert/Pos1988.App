@@ -1,30 +1,44 @@
 ﻿@page "/"
 
 <div class="container">
-    <h1>Restaurante</h1>
+    <h1>Restaurant Management</h1>
 
     <div class="row">
         <div class="col-md-4">
-            <h2>Mesas</h2>
-            <ul class="list-group">
-                <a href="/mesas" class="list-group-item">Ver mesas</a>
-                <a href="/mesas/crear" class="list-group-item">Agregar mesa</a>
-            </ul>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Tables</h2>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <a href="/tables" class="list-group-item">View Tables</a>
+                    <a href="/tables/create" class="list-group-item">Add Table</a>
+                </ul>
+            </div>
         </div>
+
         <div class="col-md-4">
-            <h2>Menú</h2>
-            <ul class="list-group">
-                <a href="/menu" class="list-group-item">Ver menú</a>
-                <a href="/menu/categorias" class="list-group-item">Ver categorías</a>
-                <a href="/menu/crear" class="list-group-item">Agregar platillo</a>
-            </ul>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Menu</h2>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <a href="/menu" class="list-group-item">View Menu</a>
+                    <a href="/menu/categories" class="list-group-item">Manage Categories</a>
+                    <a href="/menu/create" class="list-group-item">Add Item</a>
+                </ul>
+            </div>
         </div>
+
         <div class="col-md-4">
-            <h2>Órdenes</h2>
-            <ul class="list-group">
-                <a href="/ordenes" class="list-group-item">Ver órdenes</a>
-                <a href="/ordenes/crear" class="list-group-item">Nueva orden</a>
-            </ul>
+            <div class="card">
+                <div class="card-header">
+                    <h2>Orders</h2>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <a href="/orders" class="list-group-item">View Orders</a>
+                    <a href="/orders/create" class="list-group-item">Create Order</a>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

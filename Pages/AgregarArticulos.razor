@@ -1,0 +1,77 @@
+﻿@page "/agregar-articulos"
+@using Pos1988.Data;
+
+<h1>Agregar artículos a la orden</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Articulos disponibles</h2>
+        <ul class="list-group">
+            @foreach (var item in availableItems)
+            {
+                <li class="list-group-item">
+                    <input type="checkbox" name="items" value="@item.Id" />
+                    @item.Name
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2>Detalles de la orden</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in order.Items)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.Price.ToString("C")</td>
+                        <td><input type="number" value="@item.Quantity" /></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <p>
+            <strong>Total:</strong> @order.Total.ToString("C")
+        </p>
+        <button class="btn btn-primary">Confirmar orden</button>
+    </div>
+</div>
+
+@code {
+    private List<OrderItem> availableItems;
+    private Order order;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Carga de datos ficticios para la prueba
+        availableItems = new List<OrderItem>
+    {
+      new OrderItem { Name = "Hamburguesa", Price = 10.50m },
+      new OrderItem { Name = "Papas fritas", Price = 5.00m },
+      new OrderItem { Name = "Refresco", Price = 2.50m }
+    };
+
+        order = new Order
+            {
+                Items = new List<OrderItem>()
+            };
+    }
+
+    private void AddItemToOrder(OrderItem item)
+    {
+        // Agregar lógica para agregar el artículo a la orden
+        // Actualizar el total de la orden
+    }
+
+    private void ConfirmOrder()
+    {
+        // Enviar la información de la orden al servidor
+    }
+}

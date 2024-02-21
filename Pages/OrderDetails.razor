@@ -1,0 +1,52 @@
+﻿@page "/orden"
+@using Pos1988.Data;
+
+<h1>Detalles de la orden</h1>
+
+<p>
+    <strong>Fecha:</strong> @order.Created.ToShortDateString()
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in order.Items)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <strong>Total:</strong> @order.Total.ToString("C")
+</p>
+
+@code {
+    private Order order;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Carga de datos ficticios para la prueba
+        order = new Order
+            {
+                Created = DateTime.Now,
+                Items = new List<OrderItem>
+      {
+        new OrderItem { Name = "Hamburguesa", Price = 10.50m },
+        new OrderItem { Name = "Papas fritas", Price = 5.00m },
+        new OrderItem { Name = "Refresco", Price = 2.50m }
+      }
+            };
+
+        // Cálculo del total
+        order.Total = order.Items.Sum(i => i.Price);
+    }
+}

@@ -4,7 +4,7 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pos1988", "Pos1988.csproj", "{567CD15C-73A3-492E-B57B-4D894C58809E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pos1988.Core", "..\Pos1988.Core\Pos1988.Core.csproj", "{BE4E5EF2-C53E-43B8-826F-ED44B6900B21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pos1988.Core", "..\Pos1988.Core\Pos1988.Core.csproj", "{BE4E5EF2-C53E-43B8-826F-ED44B6900B21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
